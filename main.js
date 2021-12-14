@@ -1,16 +1,16 @@
-var canvas = document.querySelector('canvas');
+const canvas = document.querySelector('canvas');
 canvas.width = window.innerWidth;
 canvas.height = window.innerHeight;
 
-var g = canvas.getContext('2d');
+const g = canvas.getContext('2d');
 
-var nodes = [[-1, -1, -1], [-1, -1, 1], [-1, 1, -1], [-1, 1, 1],
+const nodes = [[-1, -1, -1], [-1, -1, 1], [-1, 1, -1], [-1, 1, 1],
 [1, -1, -1], [1, -1, 1], [1, 1, -1], [1, 1, 1]];
 
-var edges = [[0, 1], [1, 3], [3, 2], [2, 0], [4, 5], [5, 7], [7, 6],
+const edges = [[0, 1], [1, 3], [3, 2], [2, 0], [4, 5], [5, 7], [7, 6],
 [6, 4], [0, 4], [1, 5], [2, 6], [3, 7]];
 
-var mouseX = 0, prevMouseX, mouseY = 0, prevMouseY;
+let mouseX = 0, prevMouseX, mouseY = 0, prevMouseY;
 
 canvas.addEventListener('mousemove', function (event) {
     prevMouseX = mouseX;
@@ -18,8 +18,8 @@ canvas.addEventListener('mousemove', function (event) {
     mouseX = event.x;
     mouseY = event.y;
 
-    var incrX = (mouseX - prevMouseX) * 0.01;
-    var incrY = (mouseY - prevMouseY) * 0.01;
+    const incrX = (mouseX - prevMouseX) * 0.01;
+    const incrY = (mouseY - prevMouseY) * 0.01;
 
     rotateCuboid(incrX, incrY);
     drawCuboid();
@@ -35,16 +35,16 @@ function scale(factor0, factor1, factor2) {
 
 function rotateCuboid(angleX, angleY) {
 
-    var sinX = Math.sin(angleX);
-    var cosX = Math.cos(angleX);
+    const sinX = Math.sin(angleX);
+    const cosX = Math.cos(angleX);
 
-    var sinY = Math.sin(angleY);
-    var cosY = Math.cos(angleY);
+    const sinY = Math.sin(angleY);
+    const cosY = Math.cos(angleY);
 
     nodes.forEach(function (node) {
-        var x = node[0];
-        var y = node[1];
-        var z = node[2];
+        const x = node[0];
+        const y = node[1];
+        let z = node[2];
 
         node[0] = x * cosX - z * sinX;
         node[2] = z * cosX + x * sinX;
@@ -65,8 +65,8 @@ function drawCuboid() {
     g.beginPath();
 
     edges.forEach(function (edge) {
-        var p1 = nodes[edge[0]];
-        var p2 = nodes[edge[1]];
+        const p1 = nodes[edge[0]];
+        const p2 = nodes[edge[1]];
         g.moveTo(p1[0], p1[1]);
         g.lineTo(p2[0], p2[1]);
     });
